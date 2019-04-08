@@ -1,2 +1,11 @@
 (defpackage :jg-cl-raytracer
-  (:use :cl))
+  (:nicknames :jgrt)
+  (:use :cl)
+  (:export :make-jg-vec 
+           :make-jg-point
+           :x
+           :y
+           :z
+           :jg-pointp
+           :jg-vecp)) 
+
