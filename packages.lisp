@@ -6,6 +6,6 @@
            :x
            :y
            :z
-           :jg-pointp
-           :jg-vecp)) 
+           :jg-point?
+           :jg-vec?)) 
 
