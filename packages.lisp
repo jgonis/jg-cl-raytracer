@@ -5,9 +5,10 @@
            :make-jg-point
            :equivalent
            :add
+           :subtract
            :x
            :y
            :z
            :jg-point?
-           :jg-vec?)) 
+           :jg-vec?))
 
