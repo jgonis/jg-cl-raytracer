@@ -1,6 +1,7 @@
 (defsystem :jg-cl-raytracer
   :description "Work on making a raytracer in Common Lisp"
   :version "0.0.1"
+  :depends-on (:zpng)
   :author "Jeff Gonis <jeffgonis@fastmail.com"
   :licence "LGPL 3.0"
   :components ((:file "packages")
