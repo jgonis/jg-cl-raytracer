@@ -3,6 +3,8 @@
   (:use :cl)
   (:export :make-jg-vec 
            :make-jg-point
+           :equivalent
+           :add
            :x
            :y
            :z
