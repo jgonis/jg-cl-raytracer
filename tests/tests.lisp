@@ -65,4 +65,50 @@
     (is (= 2 (y v2)))
     (is (= -3 (z v2)))))
 
+(test scale-vector-by-number
+  (let* ((v1 (make-jg-vec 1 -2 3))
+         (result (scale v1 3.5))
+         (expected-result-vec (make-jg-vec 3.5 -7 10.5)))
+    (is (jg-vec? result))
+    (is (equivalent expected-result-vec result))))
 
+(test scale-vector-by-fraction
+  (let* ((v1 (make-jg-vec 1 -2 3))
+         (result (scale v1 0.5))
+         (expected-result-vec (make-jg-vec 0.5 -1 1.5)))
+    (is (jg-vec? result))
+    (is (equivalent expected-result-vec result))))
+
+(test divide-vector
+  (let* ((v1 (make-jg-vec 1 -2 3))
+         (result (div v1 2))
+         (expected-result-vec (make-jg-vec 0.5 -1 1.5)))
+    (is (jg-vec? result))
+    (is (equivalent expected-result-vec result))))
+
+(test magnitude-x-unit-vector
+  (let* ((v1 (make-jg-vec 1 0 0))
+         (mag (magnitude v1)))
+    (is (equivalent mag 1.0))))
+
+(test magnitude-y-unit-vector
+  (let* ((v1 (make-jg-vec 0 1 0))
+         (mag (magnitude v1)))
+    (is (equivalent mag 1.0))))
+
+(test magnitude-z-unit-vector
+  (let* ((v1 (make-jg-vec 0 0 1))
+         (mag (magnitude v1)))
+    (is (equivalent mag 1.0))))
+
+(test magnitude-positive-vector
+  (let* ((v1 (make-jg-vec 1 2 3))
+         (mag (magnitude v1))
+         (expected-magnitude (sqrt 14)))
+    (is (equivalent expected-magnitude mag))))
+
+(test magnitude-negative-vector
+  (let* ((v1 (make-jg-vec -1 -2 -3))
+         (mag (magnitude v1))
+         (expected-magnitude (sqrt 14)))
+    (is (equivalent expected-magnitude mag))))

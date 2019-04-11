@@ -7,6 +7,9 @@
            :add
            :subtract
            :negate
+           :scale
+           :div
+           :magnitude
            :x
            :y
            :z
