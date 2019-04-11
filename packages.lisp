@@ -6,6 +6,7 @@
            :equivalent
            :add
            :subtract
+           :negate
            :x
            :y
            :z

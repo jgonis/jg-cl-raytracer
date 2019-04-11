@@ -23,20 +23,26 @@
 (defparameter *epsilon* 0.0000001)
 
 (defun make-jg-point (x y z)
-  (make-instance 'jg-point :x x :y y :z z))
+  (make-instance 'jg-point 
+                 :x (coerce x 'float) 
+                 :y (coerce y 'float) 
+                 :z (coerce z 'float)))
 (defun make-jg-vec (x y z)
-  (make-instance 'jg-vec :x x :y y :z z))
+  (make-instance 'jg-vec 
+                 :x (coerce x 'float) 
+                 :y (coerce y 'float) 
+                 :z (coerce z 'float)))
+
 (defun jg-point? (pt)
  (typep pt 'jg-point))
 (defun jg-vec? (vec)
-  (typep vec 'jg-vec)
-)
+  (typep vec 'jg-vec))
+
 (defgeneric equivalent (obj1 obj2))
 (defmethod equivalent ((vec1 jg-vec) (vec2 jg-vec))
   (and (<= (abs (- (x vec1) (x vec2))) *epsilon*)
        (<= (abs (- (y vec1) (y vec2))) *epsilon*)
        (<= (abs (- (z vec1) (z vec2))) *epsilon*)))
-
 (defmethod equivalent ((pt1 jg-point) (pt2 jg-point))
   (and (<= (abs (- (x pt1) (x pt2))) *epsilon*)
        (<= (abs (- (y pt1) (y pt2))) *epsilon*)
@@ -51,6 +57,7 @@
   (make-jg-vec (+ (x addend1) (x addend2))
                (+ (y addend1) (y addend2))
                (+ (z addend1) (z addend2))))
+
 (defgeneric subtract (subend1 subend2))
 (defmethod subtract ((subend1 jg-point) (subend2 jg-point))
   (make-jg-vec (- (x subend1) (x subend2))
@@ -60,3 +67,16 @@
   (make-jg-point (- (x subend1) (x subend2))
                  (- (y subend1) (y subend2))
                  (- (z subend1) (z subend2))))
+(defmethod subtract ((subend1 jg-vec) (subend2 jg-vec))
+  (make-jg-vec (- (x subend1) (x subend2))
+               (- (y subend1) (y subend2))
+               (- (z subend1) (z subend2))))
+
+(defgeneric negate (vec))
+(defmethod negate ((vec jg-vec))
+  (make-jg-vec (- (x vec))
+               (- (y vec))
+               (- (z vec))))
+
+(defgeneric scale (vec scalar))
+(defmethod scale ((vec jg-vec) (scalar number)))

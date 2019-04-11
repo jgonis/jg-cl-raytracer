@@ -37,3 +37,32 @@
     (is (= -2 (x v1)))
     (is (= -4 (y v1)))
     (is (= -6 (z v1)))))
+
+(test subtract-vec-from-point
+  (let* ((p1 (make-jg-point 3 2 1))
+         (v1 (make-jg-vec 5 6 7))
+         (p2 (subtract p1 v1)))
+    (is (jg-point? p2))
+    (is (null (jg-vec? p2)))
+    (is (= -2 (x p2)))
+    (is (= -4 (y p2)))
+    (is (= -6 (z p2)))))
+
+(test subtract-vec-from-vec
+  (let* ((v1 (make-jg-vec 3 2 1))
+         (v2 (make-jg-vec 5 6 7))
+         (v3 (subtract v1 v2)))
+    (is (jg-vec? v3))
+    (is (= -2 (x v3)))
+    (is (= -4 (y v3)))
+    (is (= -6 (z v3)))))
+
+(test negate-vec
+  (let* ((v1 (make-jg-vec 1 -2 3))
+         (v2 (negate v1)))
+    (is (jg-vec? v2))
+    (is (= -1 (x v2)))
+    (is (= 2 (y v2)))
+    (is (= -3 (z v2)))))
+
+
