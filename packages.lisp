@@ -10,6 +10,8 @@
            :scale
            :div
            :magnitude
+           :normalize
+           :dot-product
            :x
            :y
            :z

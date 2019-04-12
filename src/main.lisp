@@ -97,3 +97,16 @@
   (sqrt (+ (expt (x vec) 2)
            (expt (y vec) 2)
            (expt (z vec) 2))))
+
+(defgeneric normalize (vec))
+(defmethod normalize ((vec jg-vec))
+  (let ((mag (magnitude vec)))
+    (make-jg-vec (/ (x vec) mag)
+                 (/ (y vec) mag)
+                 (/ (z vec) mag))))
+
+(defgeneric dot-product (vec1 vec2))
+(defmethod dot-product ((vec1 jg-vec) (vec2 jg-vec))
+  (+ (* (x vec1) (x vec2))
+     (* (y vec1) (y vec2))
+     (* (z vec1) (z vec2))))

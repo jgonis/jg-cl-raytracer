@@ -112,3 +112,29 @@
          (mag (magnitude v1))
          (expected-magnitude (sqrt 14)))
     (is (equivalent expected-magnitude mag))))
+
+(test vector-normalize-x-vector
+  (let* ((v1 (make-jg-vec 4 0 0))
+         (result (normalize v1))
+         (expected-result-vec (make-jg-vec 1 0 0)))
+    (is (jg-vec? result))
+    (is (equivalent expected-result-vec result))))
+
+(test vector-normalize
+  (let* ((v1 (make-jg-vec 1 2 3))
+         (result (normalize v1))
+         (mag (sqrt (+ (expt 1 2) 
+                       (expt 2 2) 
+                       (expt 3 2))))
+         (expected-result-vec (make-jg-vec (/ 1 mag)
+                                           (/ 2 mag)
+                                           (/ 3 mag))))
+    (is (jg-vec? result))
+    (is (equivalent expected-result-vec result))))
+
+(test test-dot-product
+  (let* ((v1 (make-jg-vec 1 2 3))
+         (v2 (make-jg-vec 2 3 4))
+         (result (dot-product v1 v2)))
+
+    (is (equivalent 20.0 result))))
