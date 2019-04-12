@@ -12,6 +12,7 @@
            :magnitude
            :normalize
            :dot-product
+           :cross-prod
            :x
            :y
            :z

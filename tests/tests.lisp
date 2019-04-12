@@ -138,3 +138,19 @@
          (result (dot-product v1 v2)))
 
     (is (equivalent 20.0 result))))
+
+(test test-cross-product
+  (let* ((v1 (make-jg-vec 1 2 3))
+         (v2 (make-jg-vec 2 3 4))
+         (result (cross-prod v1 v2))
+         (expected-result-vec (make-jg-vec -1 2 -1)))
+    (is (jg-vec? result))
+    (is (equivalent expected-result-vec result))))
+
+(test test-cross-product-2
+  (let* ((v1 (make-jg-vec 1 2 3))
+         (v2 (make-jg-vec 2 3 4))
+         (result (cross-prod v2 v1))
+         (expected-result-vec (make-jg-vec 1 -2 1)))
+    (is (jg-vec? result))
+    (is (equivalent expected-result-vec result))))

@@ -110,3 +110,12 @@
   (+ (* (x vec1) (x vec2))
      (* (y vec1) (y vec2))
      (* (z vec1) (z vec2))))
+
+(defgeneric cross-prod (vec1 vec2))
+(defmethod cross-prod ((vec1 jg-vec) (vec2 jg-vec))
+  (make-jg-vec (- (* (y vec1) (z vec2)) 
+                  (* (z vec1) (y vec2)))
+               (- (* (z vec1) (x vec2))
+                  (* (x vec1) (z vec2)))
+               (- (* (x vec1) (y vec2))
+                  (* (y vec1) (x vec2)))))
