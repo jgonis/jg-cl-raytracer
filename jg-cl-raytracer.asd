@@ -1,13 +1,15 @@
 (defsystem :jg-cl-raytracer
   :description "Work on making a raytracer in Common Lisp"
   :version "0.0.1"
-  :depends-on (:zpng)
   :author "Jeff Gonis <jeffgonis@fastmail.com"
   :licence "LGPL 3.0"
   :components ((:file "packages")
                (:module "src" 
                 :serial t 
-                :components ((:file "main")))))
+                :components ((:file "utils") 
+                             (:file "geom")
+                             (:file "color")
+                             (:file "main")))))
 
 (defsystem :jg-cl-raytracer/test
   :description "Test suite for the raytracer"

@@ -1,0 +1,8 @@
+(in-package :jg-cl-utils)
+(defparameter *epsilon* 0.000001)
+(defgeneric equivalent (obj1 obj2))
+(defmethod equivalent ((float1 float) (float2 float))
+  (<= (abs (- float1 float2)) *epsilon*))
+(defgeneric add (addend1 addend2))
+(defgeneric subtract (subend1 subend2))
+(defgeneric scale (vec scalar))

@@ -1,21 +1,36 @@
-(defpackage :jg-cl-raytracer
-  (:nicknames :jgrt)
+(defpackage :jg-cl-utils
+  (:nicknames :jgutl)
   (:use :cl)
-  (:export :make-jg-vec 
-           :make-jg-point
-           :equivalent
+  (:export :equivalent
            :add
            :subtract
+           :scale))
+
+(defpackage :jg-cl-color
+  (:nicknames :jgclr)
+  (:use :cl
+        :jgutl)
+  (:export :make-jg-color
+           :jg-color?
+           :r
+           :g
+           :b))
+
+(defpackage :jg-cl-geom
+  (:nicknames :jggeom)
+  (:use :cl
+        :jgutl)
+  (:export :make-jg-vec 
+           :make-jg-point
+           :x
+           :y
+           :z
            :negate
-           :scale
            :div
            :magnitude
            :normalize
            :dot-product
            :cross-prod
-           :x
-           :y
-           :z
            :jg-point?
            :jg-vec?))
 

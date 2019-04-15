@@ -154,3 +154,17 @@
          (expected-result-vec (make-jg-vec 1 -2 1)))
     (is (jg-vec? result))
     (is (equivalent expected-result-vec result))))
+
+(test make-color-test
+  (let* ((color (make-jg-color -0.5 0.4 1.7)))
+    (is (equivalent -0.5 (r color)))
+    (is (equivalent 0.4 (g color)))
+    (is (equivalent 1.7 (b color)))))
+
+(test add-colors
+  (let* ((c1 (make-jg-color 0.9 0.6 0.75))
+         (c2 (make-jg-color 0.7 0.1 0.25))
+         (expected-result (make-jg-color 1.6 0.7 1.0))
+         (result (add c1 c2)))
+    (is (jg-color? result))
+    (is (equivalent expected-result result))))
