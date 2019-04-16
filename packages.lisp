@@ -14,7 +14,8 @@
            :jg-color?
            :r
            :g
-           :b))
+           :b
+           :multiply))
 
 (defpackage :jg-cl-geom
   (:nicknames :jggeom)
