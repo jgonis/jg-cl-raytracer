@@ -14,10 +14,19 @@
                    :width wdth
                    :height ht
                    :pixels (make-array (* 3 wdth ht) 
-                                       :initial-element 0))))
+                                       :initial-element 0.0
+                                       :element-type 'float))))
 
 (defun jg-canvas? (obj)
   (typep obj 'jg-canvas))
+
+(defgeneric canvas->ppm (cnvs))
+(defmethod canvas->ppm ((cnvs jg-canvas))
+  (let ((ppm-stream (make-string-output-stream)))
+    (format ppm-stream "P3~%")
+    (format ppm-stream "~A ~A~%" (width cnvs) (height cnvs))
+    (write-string "255" ppm-stream)
+    (get-output-stream-string ppm-stream)))
 
 (defgeneric set-color (canvas color x y))
 (defmethod set-color ((canvas jg-canvas) 

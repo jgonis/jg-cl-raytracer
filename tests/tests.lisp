@@ -202,3 +202,17 @@
       (dotimes (x (width cnvs))
         (let ((clr (get-color cnvs x y)))
           (is (equivalent black clr)))))))
+
+(test get-and-set-color
+  (let* ((cnvs (make-jg-canvas 10 20))
+         (red (make-jg-color 1 0 0)))
+    (set-color cnvs red 2 3)
+    (is (equivalent red (get-color cnvs 2 3)))))
+
+(test canvas-to-ppm-header
+  (let* ((cnvs (make-jg-canvas 5 3))
+         (ppm (canvas->ppm cnvs))
+         (expected-ppm-string "P3
+5 3
+255"))
+    (is (string= expected-ppm-string ppm))))

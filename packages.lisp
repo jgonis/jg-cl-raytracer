@@ -42,6 +42,7 @@
         :jg-cl-color)
   (:export :make-jg-canvas
            :jg-canvas?
+           :canvas->ppm
            :width
            :height
            :set-color
