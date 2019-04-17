@@ -34,4 +34,13 @@
            :cross-prod
            :jg-point?
            :jg-vec?))
-
+(defpackage :jg-cl-canvas
+  (:nicknames :jgcnvs)
+  (:use :cl
+        :jgclr)
+  (:export :make-jg-canvas
+           :jg-canvas?
+           :width
+           :height
+           :set-color
+           :get-color))

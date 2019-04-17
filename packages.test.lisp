@@ -3,5 +3,6 @@
         :1am 
         :jg-cl-utils 
         :jg-cl-geom 
-        :jg-cl-color)
+        :jg-cl-color
+        :jg-cl-canvas)
   (:export :run-tests))
