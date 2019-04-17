@@ -191,3 +191,14 @@
          (result (multiply c1 c2)))
     (is (jg-color? result))
     (is (equivalent expected-result result))))
+
+(test create-canvas
+  (let* ((cnvs (make-jg-canvas 10 20))
+         (black (make-jg-color 0 0 0)))
+    (is (jg-canvas? cnvs))
+    (is (= 10 (width cnvs)))
+    (is (= 20 (height cnvs)))
+    (dotimes (y (height cnvs))
+      (dotimes (x (width cnvs))
+        (let ((clr (get-color cnvs x y)))
+          (is (equivalent black clr)))))))

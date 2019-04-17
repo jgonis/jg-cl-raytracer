@@ -9,6 +9,7 @@
                 :components ((:file "utils") 
                              (:file "geom")
                              (:file "color")
+                             (:file "canvas")
                              (:file "main")))))
 
 (defsystem :jg-cl-raytracer/test

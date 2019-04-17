@@ -10,7 +10,8 @@
   (:nicknames :jgclr)
   (:use :cl
         :jgutl)
-  (:export :make-jg-color
+  (:export :jg-color
+           :make-jg-color
            :jg-color?
            :r
            :g
@@ -34,10 +35,11 @@
            :cross-prod
            :jg-point?
            :jg-vec?))
+
 (defpackage :jg-cl-canvas
   (:nicknames :jgcnvs)
   (:use :cl
-        :jgclr)
+        :jg-cl-color)
   (:export :make-jg-canvas
            :jg-canvas?
            :width
