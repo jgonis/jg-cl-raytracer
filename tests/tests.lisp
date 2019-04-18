@@ -216,3 +216,23 @@
 5 3
 255"))
     (is (string= expected-ppm-string ppm))))
+
+(test canvas-to-ppm-data
+  (let ((expected-stream (make-string-output-stream)))
+    (write-string "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0"
+                  expected-stream)
+    (write-string "0 0 0 0 0 0 0 128 0 0 0 0 0 0 0"
+                  expected-stream)
+    (write-string "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
+                  expected-stream)
+    (let* ((expected (get-out-stream-string 
+                      expected-stream))
+           (cnvs (make-jg-canvas 5 3))
+           (c1 (make-jg-color 1.5 0 0))
+           (c2 (make-jg-color 0 0.5 0))
+           (c3 (make-jg-color -0.5 0 1)))
+      (set-color cnvs c1 0 0)
+      (set-color cnvs c2 2 1)
+      (set-color cnvs c3 4 2)
+      (let (result (canvas->ppm cnvs))))))
+
