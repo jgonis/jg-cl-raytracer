@@ -16,7 +16,9 @@
   :description "Test suite for the raytracer"
   :license "LGPL 3.0"
   :author "Jeff Gonis"
-  :depends-on (:jg-cl-raytracer :1am)
+  :depends-on (:jg-cl-raytracer 
+               :1am
+               :cl-utilities)
   :serial t
   :components ((:file "packages.test")
                (:module "tests"

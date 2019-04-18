@@ -4,5 +4,6 @@
         :jg-cl-utils 
         :jg-cl-geom 
         :jg-cl-color
-        :jg-cl-canvas)
+        :jg-cl-canvas
+        :cl-utilities)
   (:export :run-tests))
