@@ -211,11 +211,11 @@
 
 (test canvas-to-ppm-header
   (let* ((cnvs (make-jg-canvas 5 3))
-         (ppm (canvas->ppm cnvs))
+         (ppm-string (canvas->ppm cnvs))
          (expected-ppm-string "P3
 5 3
 255"))
-    (is (string= expected-ppm-string ppm))))
+    (is (string= expected-ppm-string ppm-string))))
 
 (test canvas-to-ppm-data
   (let ((expected-stream (make-string-output-stream)))
@@ -225,7 +225,7 @@
                   expected-stream)
     (write-string "0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
                   expected-stream)
-    (let* ((expected (get-out-stream-string 
+    (let* ((expected (get-output-stream-string 
                       expected-stream))
            (cnvs (make-jg-canvas 5 3))
            (c1 (make-jg-color 1.5 0 0))
