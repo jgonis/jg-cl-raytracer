@@ -6,3 +6,14 @@
 (defgeneric add (addend1 addend2))
 (defgeneric subtract (subend1 subend2))
 (defgeneric scale (vec scalar))
+
+(defun make-growable-vector (initial-size) 
+    (make-array initial-size :fill-pointer 0 :adjustable t))
+
+(defgeneric read-lines-to-sequence (input))
+(defmethod read-lines-to-sequence ((input stream))
+  (let ((seq (make-growable-vector 0)))
+    (do ((line (read-line input nil) (read-line input nil)))
+        ((null line) seq)
+      (vector-push-extend line seq))
+    seq))

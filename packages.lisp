@@ -4,7 +4,9 @@
   (:export :equivalent
            :add
            :subtract
-           :scale))
+           :scale
+           :make-growable-vector
+           :read-lines-to-sequence))
 
 (defpackage :jg-cl-color
   (:nicknames :jgclr)

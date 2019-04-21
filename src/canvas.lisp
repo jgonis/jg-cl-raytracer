@@ -37,6 +37,12 @@
         (format ppm-stream "~A~%" (pixel-row->string row max-value))))
     (get-output-stream-string ppm-stream)))
 
+(defun temp (pxls row-length height stream max-value)
+  (dotimes (i height)
+    (let* ((offset (* i row-length))
+             (row (subseq pxls offset (+ row-length offset))))
+      (format stream "~A~%" (pixel-row->string row max-value)))))
+
 (defun pixel-row->string (row max-value)
   (let* ((scaled-row (map (type-of row) 
                           (lambda (elem) 
