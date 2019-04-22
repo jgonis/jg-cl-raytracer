@@ -15,7 +15,9 @@
     (make-instance 'jg-canvas 
                    :width wdth
                    :height ht
-                   :pixels (make-array (* *elements-per-pixel* wdth ht) 
+                   :pixels (make-array (* *elements-per-pixel* 
+                                          wdth 
+                                          ht) 
                                        :initial-element 0.0
                                        :element-type 'float))))
 
@@ -34,14 +36,10 @@
     (dotimes (i (height cnvs))
       (let* ((offset (* i row-length))
              (row (subseq pxls offset (+ row-length offset))))
-        (format ppm-stream "~A~%" (pixel-row->string row max-value))))
+        (format ppm-stream 
+                "~A~%" 
+                (pixel-row->string row max-value))))
     (get-output-stream-string ppm-stream)))
-
-(defun temp (pxls row-length height stream max-value)
-  (dotimes (i height)
-    (let* ((offset (* i row-length))
-             (row (subseq pxls offset (+ row-length offset))))
-      (format stream "~A~%" (pixel-row->string row max-value)))))
 
 (defun pixel-row->string (row max-value)
   (let* ((scaled-row (map (type-of row) 

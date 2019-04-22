@@ -17,3 +17,6 @@
         ((null line) seq)
       (vector-push-extend line seq))
     seq))
+(defmethod read-lines-to-sequence ((input string))
+  (let ((strm (make-string-input-stream input)))
+    (read-lines-to-sequence strm)))
