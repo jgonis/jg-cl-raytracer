@@ -6,7 +6,8 @@
            :subtract
            :scale
            :make-growable-vector
-           :read-lines-to-sequence))
+           :read-lines-to-sequence
+           :wrap-lines-longer-than))
 
 (defpackage :jg-cl-color
   (:nicknames :jgclr)

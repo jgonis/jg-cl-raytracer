@@ -38,7 +38,9 @@
              (row (subseq pxls offset (+ row-length offset))))
         (format ppm-stream 
                 "~A~%" 
-                (pixel-row->string row max-value))))
+                (wrap-lines-longer-than 
+                 (pixel-row->string row max-value)
+                 70))))
     (get-output-stream-string ppm-stream)))
 
 (defun pixel-row->string (row max-value)
