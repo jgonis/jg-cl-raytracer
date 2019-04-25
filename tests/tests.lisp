@@ -243,3 +243,26 @@
         (is (string= (elt result-lines 5)
                      (elt expected-lines 2)))))))
 
+(test canvas-to-ppm-line-wrapping
+  (let* ((cnvs (make-jg-canvas 10 2))
+         (clr (make-jg-color 1 0.8 0.6)))
+    (dotimes (x (width cnvs)) 
+      (dotimes (y (height cnvs))
+        (set-color cnvs clr x y)))
+    (let* ((result (canvas->ppm cnvs))
+           (result-lines (read-lines-to-sequence result))
+           (expected-line1 
+            "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204")
+           (expected-line2 
+            "153 255 204 153 255 204 153 255 204 153 255 204 153"))
+      (is (string= expected-line1 (elt result-lines 3)))
+      (is (string= expected-line2 (elt result-lines 4)))
+      (is (string= expected-line1 (elt result-lines 5)))
+      (is (string= expected-line2 (elt result-lines 6))))))
+
+(test canvas-to-ppm-ends-withnewline
+  (let* ((cnvs (make-jg-canvas 5 3))
+         (result (canvas->ppm cnvs))
+         (result-lines (read-lines-to-sequence result)))
+    (is (char= #\Newline (elt result-lines 
+                              (- (length result-lines) 1))))))

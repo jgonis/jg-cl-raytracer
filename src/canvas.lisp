@@ -38,9 +38,10 @@
              (row (subseq pxls offset (+ row-length offset))))
         (format ppm-stream 
                 "~A~%" 
-                (wrap-lines-longer-than 
+                (jgutl:wrap-lines-longer-than 
                  (pixel-row->string row max-value)
                  70))))
+    (format ppm-stream "~%")
     (get-output-stream-string ppm-stream)))
 
 (defun pixel-row->string (row max-value)
