@@ -19,6 +19,13 @@
    (w :initform 0
       :reader w)))
 
+(defclass jg-matrix ()
+  ((data :initarg :data)
+   (rows :initarg :rows
+         :reader rows)
+   (columns :initarg :columns
+            :reader columns)))
+
 (defun make-jg-point (x y z)
   (make-instance 'jg-point 
                  :x (coerce x 'float) 
@@ -29,11 +36,24 @@
                  :x (coerce x 'float) 
                  :y (coerce y 'float) 
                  :z (coerce z 'float)))
+
+(defun make-jg-matrix (rows columns)
+  (let* ((cols (coerce columns 'fixnum))
+         (rws (coerce rows 'fixnum))
+         (arr (make-array (list rws cols)
+                          :element-type 'float
+                          :initial-element 0.0)))
+    (make-instance 'jg-matrix
+                   :rows (coerce rows 'fixnum)
+                   :columns cols
+                   :data arr)))
   
 (defun jg-point? (pt)
   (typep pt 'jg-point))
 (defun jg-vec? (vec)
   (typep vec 'jg-vec))
+(defun jg-matrix? (mat)
+  (typep mat 'jg-matrix))
 
 (defmethod equivalent ((vec1 jg-vec) (vec2 jg-vec))
   (and (equivalent (x vec1) (x vec2))
