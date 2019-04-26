@@ -1,13 +1,15 @@
 (defpackage :jg-cl-utils
   (:nicknames :jgutl)
-  (:use :cl)
+  (:use :cl
+        :jg-cl-canvas)
   (:export :equivalent
            :add
            :subtract
            :scale
            :make-growable-vector
            :read-lines-to-sequence
-           :wrap-lines-longer-than))
+           :wrap-lines-longer-than
+           :output-canvas-to-file))
 
 (defpackage :jg-cl-color
   (:nicknames :jgclr)

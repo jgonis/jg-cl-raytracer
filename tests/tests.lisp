@@ -260,9 +260,3 @@
       (is (string= expected-line1 (elt result-lines 5)))
       (is (string= expected-line2 (elt result-lines 6))))))
 
-(test canvas-to-ppm-ends-withnewline
-  (let* ((cnvs (make-jg-canvas 5 3))
-         (result (canvas->ppm cnvs))
-         (result-lines (read-lines-to-sequence result)))
-    (is (char= #\Newline (elt result-lines 
-                              (- (length result-lines) 1))))))
