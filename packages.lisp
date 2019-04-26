@@ -29,9 +29,12 @@
         :jgutl)
   (:export :make-jg-vec 
            :make-jg-point
+           :make-jg-matrix
            :x
            :y
            :z
+           :rows
+           :columns
            :negate
            :div
            :magnitude
@@ -39,7 +42,8 @@
            :dot-product
            :cross-prod
            :jg-point?
-           :jg-vec?))
+           :jg-vec?
+           :jg-matrix?))
 
 (defpackage :jg-cl-canvas
   (:nicknames :jgcnvs)
