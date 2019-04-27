@@ -260,3 +260,6 @@
       (is (string= expected-line1 (elt result-lines 5)))
       (is (string= expected-line2 (elt result-lines 6))))))
 
+(test create-2x2-matrix
+  (let ((mat (make-jg-matrix 2 2)))
+    (setf (element-at mat 0 0) 1)))
