@@ -20,7 +20,8 @@
       :reader w)))
 
 (defclass jg-matrix ()
-  ((data :initarg :data)
+  ((data :initarg :data
+         :reader data)
    (rows :initarg :rows
          :reader rows)
    (columns :initarg :columns
@@ -31,6 +32,7 @@
                  :x (coerce x 'float) 
                  :y (coerce y 'float) 
                  :z (coerce z 'float)))
+
 (defun make-jg-vec (x y z)
   (make-instance 'jg-vec 
                  :x (coerce x 'float) 
@@ -55,6 +57,28 @@
 (defun jg-matrix? (mat)
   (typep mat 'jg-matrix))
 
+(defmethod print-object ((pt jg-point) strm)
+  (format strm 
+          "Point x:~A y:~A z:~A~%" 
+          (x pt)
+          (y pt)
+          (z pt)))
+(defmethod print-object ((vec jg-vec) strm)
+  (format strm 
+          "Vector x:~A y:~A z:~A~%" 
+          (x vec)
+          (y vec)
+          (z vec)))
+(defmethod print-object ((mat jg-matrix) strm)
+  (format strm "Matrix:~%")
+  (let ((data (data mat))
+        (rows (rows mat))
+        (cols (columns mat)))
+    (dotimes (i rows) 
+      (dotimes (j cols)
+        (format strm "~A " (aref data i j)))
+      (format strm "~%"))))
+
 (defmethod equivalent ((vec1 jg-vec) (vec2 jg-vec))
   (and (equivalent (x vec1) (x vec2))
        (equivalent (y vec1) (y vec2))
@@ -63,7 +87,13 @@
   (and (equivalent (x pt1) (x pt2))
        (equivalent (y pt1) (y pt2))
        (equivalent (z pt1) (z pt2))))
+(defmethod equivalent ((mat1 jg-matrix) (mat2 jg-matrix))
+  (null (mismatch (data mat1) (data mat2))))
 
+(defun element-at (matrix row column)
+  (aref (data matrix) row column))
+(defun (setf element-at) (new-value matrix row column)
+  (setf (aref (data matrix) row column) new-value))
 
 (defmethod add ((addend1 jg-point) (addend2 jg-vec))
   (make-jg-point (+ (x addend1) (x addend2))

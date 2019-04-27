@@ -39,3 +39,10 @@
   (make-jg-color (* (r color1) (r color2))
                  (* (g color1) (g color2))
                  (* (b color1) (b color2))))
+
+(defmethod print-object ((clr jg-color) strm)
+  (format strm 
+          "Color r:~A g:~A b:~A~%" 
+          (r clr)
+          (g clr)
+          (b clr)))

@@ -36,9 +36,8 @@
                                           wrap-length))))
     (get-output-stream-string out-stream)))
 
-(defun output-canvas-to-file (file-path cnvs)
-  (let ((canvas-string (canvas->ppm cnvs)))
-    (with-open-file (strm file-path 
-                          :direction :output 
-                          :if-exists :supersede)
-      (format strm "~A~%" canvas-string))))
+(defun output-canvas-to-file (file-path canvas-string)
+  (with-open-file (strm file-path 
+                        :direction :output 
+                        :if-exists :supersede)
+    (format strm "~A~%" canvas-string)))

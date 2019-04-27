@@ -1,7 +1,6 @@
 (defpackage :jg-cl-utils
   (:nicknames :jgutl)
-  (:use :cl
-        :jg-cl-canvas)
+  (:use :cl)
   (:export :equivalent
            :add
            :subtract
@@ -30,6 +29,7 @@
   (:export :make-jg-vec 
            :make-jg-point
            :make-jg-matrix
+           :element-at
            :x
            :y
            :z
