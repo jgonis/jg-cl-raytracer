@@ -52,10 +52,11 @@
                (dotimes (i rows)
                  (dotimes (j columns)
                    (setf (aref arr i j) 
-                         (elt data (+ j (* i rows)))))))))
+                         (coerce (elt data (+ j (* i rows)))
+                                 'float)))))))
     (make-instance 'jg-matrix
                    :rows (coerce rows 'fixnum)
-                   :columns cols
+                   :columns (coerce cols 'fixnum)
                    :data arr)))
   
 (defun jg-point? (pt)
@@ -96,10 +97,14 @@
        (equivalent (y pt1) (y pt2))
        (equivalent (z pt1) (z pt2))))
 (defmethod equivalent ((mat1 jg-matrix) (mat2 jg-matrix))
-  (null (mismatch (data mat1) 
-                  (data mat2) 
-                  :test (lambda (elem1 elem2)
-                          (equivalent elem1 elem2)))))
+  (and (= (rows mat1) (rows mat2))
+       (= (columns mat1) (columns mat2))
+       (dotimes (i (rows mat1) t)
+         (if (null (dotimes (j (columns mat1) t)
+                     (if (not (equivalent (element-at mat1 i j)
+                                 (element-at mat2 i j)))
+                         (return nil))))
+             (return nil)))))
 
 (defun element-at (matrix row column)
   (aref (data matrix) row column))
