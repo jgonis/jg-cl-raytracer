@@ -102,7 +102,7 @@
        (dotimes (i (rows mat1) t)
          (if (null (dotimes (j (columns mat1) t)
                      (if (not (equivalent (element-at mat1 i j)
-                                 (element-at mat2 i j)))
+                                          (element-at mat2 i j)))
                          (return nil))))
              (return nil)))))
 
