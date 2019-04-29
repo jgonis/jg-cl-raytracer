@@ -39,12 +39,20 @@
                  :y (coerce y 'float) 
                  :z (coerce z 'float)))
 
-(defun make-jg-matrix (rows columns)
+(defun make-jg-matrix (rows columns &key data)
   (let* ((cols (coerce columns 'fixnum))
          (rws (coerce rows 'fixnum))
          (arr (make-array (list rws cols)
                           :element-type 'float
                           :initial-element 0.0)))
+    (cond ((not (null data))
+           (if (not (= (length data) (* rows columns)))
+               (warn 
+                "Not enough elements in data to populate matrix")
+               (dotimes (i rows)
+                 (dotimes (j columns)
+                   (setf (aref arr i j) 
+                         (elt data (+ j (* i rows)))))))))
     (make-instance 'jg-matrix
                    :rows (coerce rows 'fixnum)
                    :columns cols
@@ -88,12 +96,15 @@
        (equivalent (y pt1) (y pt2))
        (equivalent (z pt1) (z pt2))))
 (defmethod equivalent ((mat1 jg-matrix) (mat2 jg-matrix))
-  (null (mismatch (data mat1) (data mat2))))
+  (null (mismatch (data mat1) 
+                  (data mat2) 
+                  :test (lambda (elem1 elem2)
+                          (equivalent elem1 elem2)))))
 
 (defun element-at (matrix row column)
   (aref (data matrix) row column))
 (defun (setf element-at) (new-value matrix row column)
-  (setf (aref (data matrix) row column) new-value))
+  (setf (aref (data matrix) row column) (coerce new-value 'float)))
 
 (defmethod add ((addend1 jg-point) (addend2 jg-vec))
   (make-jg-point (+ (x addend1) (x addend2))
