@@ -277,3 +277,13 @@
                             3
                             :data '(2 3 4 5 6 7 8 9 8))))
     (is (not (equivalent m1 m2)))))
+
+
+(test matrix-multiply-by-tuple
+  (let* ((A (make-jg-matrix 4 
+                            4 
+                            :data '(1 2 3 4 2 4 4 2 8 6 4 1 0 0 0 1)))
+         (B (make-jg-matrix 4 1 :data '(1 2 3 1)))
+         (expected-result (make-jg-matrix 4 1 :data '(18 24 33 1)))
+         (result (multiply A B)))
+    (is (equivalent expected-result result))))

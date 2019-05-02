@@ -4,6 +4,7 @@
   (:export :equivalent
            :add
            :subtract
+           :multiply
            :scale
            :make-growable-vector
            :read-lines-to-sequence

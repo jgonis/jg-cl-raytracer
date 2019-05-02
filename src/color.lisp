@@ -34,7 +34,7 @@
   (make-jg-color (* (r color) scalar)
                  (* (g color) scalar)
                  (* (b color) scalar)))
-(defgeneric multiply (color1 color2))
+
 (defmethod multiply ((color1 jg-color) (color2 jg-color))
   (make-jg-color (* (r color1) (r color2))
                  (* (g color1) (g color2))
