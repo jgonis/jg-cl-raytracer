@@ -312,3 +312,69 @@
          (B (make-identity-matrix 4 4))
          (result (multiply A B)))
     (is (equivalent A result))))
+
+(test matrix-transpose
+  (let* ((A (make-jg-matrix 4 
+                            4 
+                            :data '(0 9 3 0 9 8 0 8 1 
+                                    8 5 3 0 0 5 8)))
+         (expected (make-jg-matrix 4
+                                   4
+                                   :data '(0 9 1 0 9 8 8 0 
+                                           3 0 5 5 0 8 3 8)))
+         (result (transpose A)))
+    (is (equivalent expected result))))
+
+(test transpose-identity
+  (let* ((A (make-identity-matrix 4 4))
+         (expected (make-identity-matrix 4 4))
+         (result (transpose A)))
+    (is (equivalent expected result))))
+
+(test calculate-determinant
+  (let* ((A (make-jg-matrix 2 2 :data '(1 5 -3 2)))
+         (result (determinant A)))
+    (is (= 17 result))))
+
+(test submatrix-of-3x3-matrix
+  (let* ((A (make-jg-matrix 3
+                            3
+                            :data '(1 5 0 -3 2 7 0 6 -3)))
+         (expected-result (make-jg-matrix 2 
+                                          2
+                                          :data '(-3 2 0 6)))
+         (result (submatrix A 0 2)))
+    (is (equivalent expected-result result))))
+
+(test submatrix-of-4x4-matrix
+  (let* ((A (make-jg-matrix 4
+                            4
+                            :data '(-6 1 1 6 -8 5 8 6 -1 
+                                    0 8 2 -7 1 -1 1)))
+         (expected (make-jg-matrix 3
+                                   3
+                                   :data '(-6 1 6 -8 8 6 -7 -1 1)))
+         (result (submatrix A 2 1)))
+    (is (equivalent expected result))))
+
+(test test-minor-of-3x3-matrix
+  (let* ((A (make-jg-matrix 3
+                            3
+                            :data '(3 5 0 2 -1 -7 6 -1 5)))
+         (B (submatrix A 1 0))
+         (det-b (determinant B))
+         (result (minor A 1 0)))
+    (is (= det-b result))))
+
+(test test-cofactor-of-3x3-matrix
+  (let* ((A (make-jg-matrix 3
+                            3
+                            :data '(3 5 0 2 -1 -7 6 -1 5)))
+         (minor-a (minor A 0 0))
+         (cofactor-a (cofactor A 0 0))
+         (minor-a-2 (minor A 1 0))
+         (cofactor-a-2 (cofactor A 1 0)))
+    (is (= minor-a -12))
+    (is (= cofactor-a -12))
+    (is (= minor-a-2 25))
+    (is (= cofactor-a-2 -25))))

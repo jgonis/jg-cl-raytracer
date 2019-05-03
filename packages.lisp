@@ -36,12 +36,17 @@
            :z
            :rows
            :columns
+           :transpose
            :negate
            :div
            :magnitude
            :normalize
            :dot-product
            :cross-prod
+           :determinant
+           :submatrix
+           :minor
+           :cofactor
            :jg-point?
            :jg-vec?
            :jg-matrix?))
