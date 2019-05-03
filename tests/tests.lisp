@@ -378,3 +378,23 @@
     (is (= cofactor-a -12))
     (is (= minor-a-2 25))
     (is (= cofactor-a-2 -25))))
+
+(test determinant-of-3x3-matrix
+  (let ((A (make-jg-matrix 3
+                            3
+                            :data'(1 2 6 -5 8 -4 2 6 4))))
+    (is (= (cofactor A 0 0) 56))
+    (is (= (cofactor A 0 1) 12))
+    (is (= (cofactor A 0 2) -46))
+    (is (= (determinant A) -196))))
+
+(test determinant-of-4x4-matrix
+  (let ((A (make-jg-matrix 4
+                           4
+                           :data '(-2 -8 3 5 -3 1 7 3 1 
+                                   2 -9 6 -6 7 7 -9))))
+    (is (= (cofactor A 0 0) 690))
+    (is (= (cofactor A 0 1) 447))
+    (is (= (cofactor A 0 2) 210))
+    (is (= (cofactor A 0 3) 51))
+    (is (= (determinant A) -4071))))
