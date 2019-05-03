@@ -29,6 +29,7 @@
   (:export :make-jg-vec 
            :make-jg-point
            :make-jg-matrix
+           :make-identity-matrix
            :element-at
            :x
            :y

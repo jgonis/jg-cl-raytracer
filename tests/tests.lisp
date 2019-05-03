@@ -278,6 +278,22 @@
                             :data '(2 3 4 5 6 7 8 9 8))))
     (is (not (equivalent m1 m2)))))
 
+(test matrix-multiply
+  (let* ((A (make-jg-matrix 4
+                            4
+                            :data '(1 2 3 4 5 6 7 8 9 8 7 
+                                    6 5 4 3 2)))
+         (B (make-jg-matrix 4
+                            4
+                            :data '(-2 1 2 3 3 2 1 -1 4 3 
+                                    6 5 1 2 7 8)))
+         (expected (make-jg-matrix 4 
+                                   4
+                                   :data '(20 22 50 48 44 54 
+                                           114 108 40 58 110 
+                                           102 16 26 46 42)))
+         (result (multiply A B)))
+    (is (equivalent expected result))))
 
 (test matrix-multiply-by-tuple
   (let* ((A (make-jg-matrix 4 
@@ -287,3 +303,12 @@
          (expected-result (make-jg-matrix 4 1 :data '(18 24 33 1)))
          (result (multiply A B)))
     (is (equivalent expected-result result))))
+
+(test multiply-by-identity-matrix
+  (let* ((A (make-jg-matrix 4
+                            4
+                            :data '(0 1 2 4 1 2 4 8 2 4 6 
+                                    16 4 8 16 32)))
+         (B (make-identity-matrix 4 4))
+         (result (multiply A B)))
+    (is (equivalent A result))))
