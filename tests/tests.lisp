@@ -398,3 +398,36 @@
     (is (= (cofactor A 0 2) 210))
     (is (= (cofactor A 0 3) 51))
     (is (= (determinant A) -4071))))
+
+(test is-matrix-invertible
+  (let ((A (make-jg-matrix 4
+                           4
+                           :data '(6 4 4 4 5 5 7 6 4 -9 3 
+                                   -7 9 1 7 -6)))
+        (B (make-jg-matrix 4 
+                           4
+                           :data '(-4 2 -2 -3 9 6 2 6 0 -5 
+                                   1 -5 0 0 0 0))))
+    (is (invertible? A))
+    (is (not (invertible? B)))))
+
+(test invert-matrix
+  (let* ((A (make-jg-matrix 4
+                            4
+                            :data '(-5 2 6 -8 1 -5 1 8 7 7 
+                                    -6 -7 1 -3 7 4)))
+         (l '(116 240 128 -24 -430 -775 -236 277 
+              -42 -119 -28 105 -278 -433 -160 163))
+         (scaled-list (mapcar (lambda (x) (/ x 532)) l))
+         (expected (make-jg-matrix 4
+                                   4
+                                   :data scaled-list))
+         (result (inverse A)))
+    (is (= (determinant A) 532))
+    (is (= (cofactor A 2 3) -160))
+    (is (equivalent (element-at result 3 2)
+                    (/ -160 532.0)))
+    (is (= (cofactor A 3 2) 105))
+    (is (equivalent (element-at result 2 3)
+                    (/ 105 532)))
+    (is (equivalent expected result))))

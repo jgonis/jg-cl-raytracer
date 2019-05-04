@@ -47,9 +47,11 @@
            :submatrix
            :minor
            :cofactor
+           :inverse
            :jg-point?
            :jg-vec?
-           :jg-matrix?))
+           :jg-matrix?
+           :invertible?))
 
 (defpackage :jg-cl-canvas
   (:nicknames :jgcnvs)

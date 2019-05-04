@@ -219,10 +219,17 @@
 
 (defgeneric determinant (mat))
 (defmethod determinant ((mat jg-matrix))
-  (- (* (element-at mat 0 0)
-        (element-at mat 1 1))
-     (* (element-at mat 0 1)
-        (element-at mat 1 0))))
+  (let ((det 0))
+    (cond ((and (= (rows mat) 2)
+                (= (columns mat) 2))
+           (- (* (element-at mat 0 0)
+                 (element-at mat 1 1))
+              (* (element-at mat 0 1)
+                 (element-at mat 1 0))))
+          (t (dotimes (i (columns mat) det)
+               (setf det (+ det 
+                            (* (element-at mat 0 i)
+                               (cofactor mat 0 i)))))))))
 
 (defgeneric submatrix (mat row column))
 (defmethod submatrix ((mat jg-matrix) (row fixnum) (column fixnum))
@@ -247,3 +254,13 @@
   (if (oddp (+ row column))
       (- (minor mat row column))
       (minor mat row column)))
+
+(defun invertible? (mat)
+  (cond ((= 0 (determinant mat)) nil)
+        (t t)))
+
+(defgeneric inverse (mat))
+(defmethod inverse ((mat jg-matrix))
+  (if (not (invertible? mat))
+      (error "Matrix is not invertible, ~A" mat)
+      mat))
