@@ -423,11 +423,55 @@
                                    4
                                    :data scaled-list))
          (result (inverse A)))
-    (is (= (determinant A) 532))
-    (is (= (cofactor A 2 3) -160))
+    (is (= (determinant A) 532.0))
+    (is (= (cofactor A 2 3) -160.0))
     (is (equivalent (element-at result 3 2)
                     (/ -160 532.0)))
-    (is (= (cofactor A 3 2) 105))
+    (is (= (cofactor A 3 2) 105.0))
     (is (equivalent (element-at result 2 3)
-                    (/ 105 532)))
+                    (/ 105 532.0)))
     (is (equivalent expected result))))
+
+(test invert-another-matrix
+  (let* ((A (make-jg-matrix 4
+                           4
+                           :data '(8 -5 9 2 7 5 6 1 -6 0 9 
+                                   6 -3 0 -9 -4)))
+        (l '(-0.153846 -0.153846 -0.2820513 -0.5384615 -0.076923 
+             0.123076 0.025641 0.0307692 0.3589743 0.3589743 
+             0.4358974  0.9230769 -0.6923077 -0.6923077 -0.7692308 
+             -1.9230769))
+        (expected (make-jg-matrix 4
+                                  4
+                                  :data l))
+         (result (inverse A)))
+    (is (equivalent expected result))))
+
+(test third-invert-test
+  (let* ((A (make-jg-matrix 4
+                            4
+                            :data '(9 3 0 9 -5 -2 -6 -3 -4 9 
+                                    6 4 -7 6 6 2)))
+         (l '(-0.0407407 -0.0777778 0.14444445 -0.2222222 -0.0777778 
+              0.03333333 0.3666667 -0.3333333 -0.0290123 -0.1462963 
+              -0.1092593 0.1296296 0.1777778 0.0666667 -0.2666667 
+              0.3333333))
+         (expected (make-jg-matrix 4
+                                   4
+                                   :data l))
+         (result (inverse A)))
+    (is (equivalent expected result))))
+
+(test multiply-matrix-by-inverse
+  (let* ((A (make-jg-matrix 4
+                            4
+                            :data '(3 -9 7 3 3 -8 2 -9 -4 4 
+                                    4 1 -6 5 -1 1)))
+         (B (make-jg-matrix 4
+                            4
+                            :data '(8 2 2 2 3 -1 7 0 7 0 5 4 
+                                    6 -2 0 5)))
+         (C (multiply A B))
+         (inv-B (inverse B))
+         (result (multiply C inv-B)))
+    (is (equivalent A result))))
