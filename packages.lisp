@@ -1,3 +1,6 @@
+(declaim (optimize (debug 3)))
+(setf *read-default-float-format* 'double-float)
+
 (defpackage :jg-cl-utils
   (:nicknames :jgutl)
   (:use :cl)
@@ -30,6 +33,7 @@
            :make-jg-point
            :make-jg-matrix
            :make-identity-matrix
+           :make-translation-matrix
            :element-at
            :x
            :y

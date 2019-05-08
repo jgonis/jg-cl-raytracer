@@ -475,3 +475,10 @@
          (inv-B (inverse B))
          (result (multiply C inv-B)))
     (is (equivalent A result))))
+
+(test test-translate-point
+  (let* ((trans-matrix (make-translation-matrix 5 -3 2))
+         (pt (make-jg-point -3 4 5))
+         (expected (make-jg-point 2 1 7))
+         (result (multiply trans-matrix pt)))
+    (is (equivalent expected result))))
