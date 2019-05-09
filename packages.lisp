@@ -35,6 +35,8 @@
            :make-identity-matrix
            :make-translation-matrix
            :make-scaling-matrix
+           :make-x-rotation-matrix
+           :make-y-rotation-matrix
            :element-at
            :x
            :y

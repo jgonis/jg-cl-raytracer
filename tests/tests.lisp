@@ -525,3 +525,41 @@
          (expected (make-jg-point -2 3 4))
          (result (multiply scale-mat p)))
     (is (equivalent expected result))))
+
+(test rotate-point-around-x-axis
+  (let* ((p (make-jg-point 0 1 0))
+         (half-quarter (make-x-rotation-matrix (/ PI 4)))
+         (full-quarter (make-x-rotation-matrix (/ PI 2)))
+         (expected-half (make-jg-point 0 
+                                       (/ (sqrt 2) 2)
+                                       (/ (sqrt 2) 2)))
+         (expected-full (make-jg-point 0 0 1))
+         (result-half (multiply half-quarter p))
+         (result-full (multiply full-quarter p)))
+    (is (equivalent expected-half result-half))
+    (is (equivalent expected-full result-full))))
+
+(test inverse-rotation-rotates-opposite
+  (let* ((p (make-jg-point 0 1 0))
+         (half-quarter (make-x-rotation-matrix (/ PI 4)))
+         (inv-rot (inverse half-quarter))
+         (expected (make-jg-point 0 
+                                  (/ (sqrt 2) 2) 
+                                  (/ (- (sqrt 2)) 2)))
+         (result (multiply inv-rot p)))
+    (is (equivalent expected result))))
+
+(test rotate-point-around-y-axis
+  (let* ((p (make-jg-point 0 0 1))
+         (half-quarter (make-y-rotation-matrix (/ PI 4)))
+         (full-quarter (make-y-rotation-matrix (/ PI 2)))
+         (expected-half (make-jg-point (/ (sqrt 2) 2) 
+                                       0
+                                       (/ (sqrt 2) 2)))
+         (expected-full (make-jg-point 1 0 0))
+         (result-half (multiply half-quarter p))
+         (result-full (multiply full-quarter p)))
+    (is (equivalent expected-half result-half))
+   (is (equivalent expected-full result-full))))
+
+(test rotate-point-around-z-axis)

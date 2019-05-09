@@ -81,6 +81,26 @@
                                 0 y-scale-f 0 0 
                                 0 0 z-scale-f 0 
                                 0 0 0 1))))
+(defun make-x-rotation-matrix (x-rad)
+  (let* ((x-rad-f (coerce x-rad 'float))
+         (cos-x (cos x-rad-f))
+         (sin-x (sin x-rad-f)))
+    (make-jg-matrix 4
+                    4
+                    :data (list 1 0 0 0 
+                                0 cos-x (- sin-x) 0
+                                0 sin-x cos-x 0
+                                0 0 0 1))))
+(defun make-y-rotation-matrix (y-rad)
+  (let* ((y-rad-f (coerce y-rad 'float))
+         (cos-y (cos y-rad-f))
+         (sin-y (sin y-rad-f)))
+    (make-jg-matrix 4
+                    4
+                    :data (list cos-y 0 sin-y 0
+                                 0 1 0 0
+                                 (- sin-y) 0 cos-y 0
+                                 0 0 0 1))))
   
 (defun jg-point? (pt)
   (typep pt 'jg-point))
