@@ -476,9 +476,52 @@
          (result (multiply C inv-B)))
     (is (equivalent A result))))
 
-(test test-translate-point
+(test translate-point
   (let* ((trans-matrix (make-translation-matrix 5 -3 2))
          (pt (make-jg-point -3 4 5))
          (expected (make-jg-point 2 1 7))
          (result (multiply trans-matrix pt)))
+    (is (equivalent expected result))))
+
+(test translate-vector-has-no-effect
+  (let* ((trans-matrix (make-translation-matrix 5 -3 2))
+         (vec (make-jg-vec -3 4 5))
+         (result (multiply trans-matrix vec)))
+    (is (equivalent vec result))))
+
+(test invert-translation-matrix-reverses-translation
+  (let* ((trans-matrix (make-translation-matrix 5 -3 2))
+         (inv-trans (inverse trans-matrix))
+         (p (make-jg-point -3 4 5))
+         (expected (make-jg-point -8 7 3))
+         (result (multiply inv-trans p)))
+    (is (equivalent expected result))))
+
+(test apply-scale-matrix-to-point
+  (let* ((scale-mat (make-scaling-matrix 2 3 4))
+         (p (make-jg-point -4 6 8))
+         (expected (make-jg-point -8 18 32))
+         (result (multiply scale-mat p)))
+    (is (equivalent expected result))))
+
+(test apply-scale-matrix-to-vec
+  (let* ((scale-mat (make-scaling-matrix 2 3 4))
+         (v (make-jg-vec -4 6 8))
+         (expected (make-jg-vec -8 18 32))
+         (result (multiply scale-mat v)))
+    (is (equivalent expected result))))
+
+(test apply-inverse-scale-matrix-shrinks
+  (let* ((scale-mat (make-scaling-matrix 2 3 4))
+         (inv-scale (inverse scale-mat))
+         (v (make-jg-vec -4 6 8))
+         (expected (make-jg-vec -2 2 2))
+         (result (multiply inv-scale v)))
+    (is (equivalent expected result))))
+
+(test reflection-is-scaling-negatively
+  (let* ((scale-mat (make-scaling-matrix -1 1 1))
+         (p (make-jg-point 2 3 4))
+         (expected (make-jg-point -2 3 4))
+         (result (multiply scale-mat p)))
     (is (equivalent expected result))))

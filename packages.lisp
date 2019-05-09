@@ -34,6 +34,7 @@
            :make-jg-matrix
            :make-identity-matrix
            :make-translation-matrix
+           :make-scaling-matrix
            :element-at
            :x
            :y
