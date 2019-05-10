@@ -101,6 +101,16 @@
                                  0 1 0 0
                                  (- sin-y) 0 cos-y 0
                                  0 0 0 1))))
+(defun make-z-rotation-matrix (z-rad)
+  (let* ((z-rad-f (coerce z-rad 'float))
+         (cos-z (cos z-rad-f))
+         (sin-z (sin z-rad-f)))
+    (make-jg-matrix 4
+                    4
+                    :data (list cos-z (- sin-z) 0 0
+                                sin-z cos-z 0 0
+                                0 0 1 0
+                                0 0 0 1))))
   
 (defun jg-point? (pt)
   (typep pt 'jg-point))

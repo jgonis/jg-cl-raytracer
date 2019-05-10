@@ -562,4 +562,15 @@
     (is (equivalent expected-half result-half))
    (is (equivalent expected-full result-full))))
 
-(test rotate-point-around-z-axis)
+(test rotate-point-around-z-axis
+  (let* ((p (make-jg-point 0 1 0))
+         (half-quarter (make-z-rotation-matrix (/ PI 4)))
+         (full-quarter (make-z-rotation-matrix (/ PI 2)))
+         (expected-half (make-jg-point (- (/ (sqrt 2) 2))
+                                       (/ (sqrt 2) 2)
+                                       0))
+         (expected-full (make-jg-point -1 0 0))
+         (result-half (multiply half-quarter p))
+         (result-full (multiply full-quarter p)))
+    (is (equivalent expected-half result-half))
+    (is (equivalent expected-full result-full))))

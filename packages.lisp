@@ -37,6 +37,7 @@
            :make-scaling-matrix
            :make-x-rotation-matrix
            :make-y-rotation-matrix
+           :make-z-rotation-matrix
            :element-at
            :x
            :y
