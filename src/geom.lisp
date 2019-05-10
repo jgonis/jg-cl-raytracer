@@ -111,6 +111,19 @@
                                 sin-z cos-z 0 0
                                 0 0 1 0
                                 0 0 0 1))))
+(defun make-shearing-matrix (x-y x-z y-x y-z z-x z-y)
+  (let* ((x-y-f (coerce x-y 'float))
+         (x-z-f (coerce x-z 'float))
+         (y-x-f (coerce y-x 'float))
+         (y-z-f (coerce y-z 'float))
+         (z-x-f (coerce z-x 'float))
+         (z-y-f (coerce z-y 'float)))
+    (make-jg-matrix 4
+                    4
+                    :data (list 1 x-y-f x-z-f 0
+                                y-x-f 1 y-z-f 0
+                                z-x-f z-y-f 1 0
+                                0 0 0 1))))
   
 (defun jg-point? (pt)
   (typep pt 'jg-point))

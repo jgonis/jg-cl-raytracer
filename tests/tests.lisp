@@ -574,3 +574,70 @@
          (result-full (multiply full-quarter p)))
     (is (equivalent expected-half result-half))
     (is (equivalent expected-full result-full))))
+
+(test shearing-x-around-y
+  (let* ((shear (make-shearing-matrix 1 0 0 0 0 0))
+         (p (make-jg-point 2 3 4))
+         (expected (make-jg-point 5 3 4))
+         (result (multiply shear p)))
+    (is (equivalent expected result))))
+
+(test shearing-x-around-z
+  (let* ((shear (make-shearing-matrix 0 1  0 0 0 0))
+         (p (make-jg-point 2 3 4))
+         (expected (make-jg-point 6 3 4))
+         (result (multiply shear p)))
+    (is (equivalent expected result))))
+
+(test shearing-y-around-x
+(let* ((shear (make-shearing-matrix 0 0 1 0 0 0))
+         (p (make-jg-point 2 3 4))
+         (expected (make-jg-point 2 5 4))
+         (result (multiply shear p)))
+    (is (equivalent expected result))))
+
+(test shearing-y-around-z
+  (let* ((shear (make-shearing-matrix 0 0 0 1 0 0))
+         (p (make-jg-point 2 3 4))
+         (expected (make-jg-point 2 7 4))
+         (result (multiply shear p)))
+    (is (equivalent expected result))))
+
+(test shearing-z-around-x
+  (let* ((shear (make-shearing-matrix 0 0 0 0 1 0))
+         (p (make-jg-point 2 3 4))
+         (expected (make-jg-point 2 3 6))
+         (result (multiply shear p)))
+    (is (equivalent expected result))))
+
+(test shearing-z-around-y
+ (let* ((shear (make-shearing-matrix 0 0 0 0 0 1))
+         (p (make-jg-point 2 3 4))
+         (expected (make-jg-point 2 3 7))
+         (result (multiply shear p)))
+    (is (equivalent expected result))))
+
+(test combine-transforms
+  (let* ((pt (make-jg-point 1 0 1))
+         (A (make-x-rotation-matrix (/ PI 2)))
+         (B (make-scaling-matrix 5 5 5))
+         (C (make-translation-matrix 10 5 7))
+         (expected-pt2 (make-jg-point 1 -1 0))
+         (pt2 (multiply A pt))
+         (expected-pt3 (make-jg-point 5 -5 0))
+         (pt3 (multiply B pt2))
+         (expected-pt4 (make-jg-point 15 0 7))
+         (pt4 (multiply C pt3)))
+    (is (equivalent expected-pt2 pt2))
+    (is (equivalent expected-pt3 pt3))
+    (is (equivalent expected-pt4 pt4))))
+
+(test combined-transformations
+  (let* ((p (make-jg-point 1 0 1))
+         (A (make-x-rotation-matrix (/ PI 2)))
+         (B (make-scaling-matrix 5 5 5))
+         (C (make-translation-matrix 10 5 7))
+         (combined-trans (multiply C (multiply B A)))
+         (expected (make-jg-point 15 0 7))
+         (result (multiply combined-trans p)))
+    (is (equivalent expected result))))
