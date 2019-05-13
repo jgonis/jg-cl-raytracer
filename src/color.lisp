@@ -30,7 +30,7 @@
                  (- (g subend1) (g subend2))
                  (- (b subend1) (b subend2))))
 
-(defmethod scale ((color jg-color) (scalar float))
+(defmethod uniform-scale ((color jg-color) (scalar float))
   (make-jg-color (* (r color) scalar)
                  (* (g color) scalar)
                  (* (b color) scalar)))

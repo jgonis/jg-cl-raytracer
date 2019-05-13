@@ -5,7 +5,7 @@
   (<= (abs (- float1 float2)) *epsilon*))
 (defgeneric add (addend1 addend2))
 (defgeneric subtract (subend1 subend2))
-(defgeneric scale (vec scalar))
+(defgeneric uniform-scale (vec scalar))
 (defgeneric multiply (multiplicand multiplier))
 
 (defun make-growable-vector (initial-size) 

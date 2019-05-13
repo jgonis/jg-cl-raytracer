@@ -8,7 +8,7 @@
            :add
            :subtract
            :multiply
-           :scale
+           :uniform-scale
            :make-growable-vector
            :read-lines-to-sequence
            :wrap-lines-longer-than
@@ -57,6 +57,11 @@
            :minor
            :cofactor
            :inverse
+           :rotate-x
+           :rotate-y
+           :rotate-z
+           :scale
+           :translate
            :jg-point?
            :jg-vec?
            :jg-matrix?

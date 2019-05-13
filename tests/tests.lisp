@@ -67,14 +67,14 @@
 
 (test scale-vector-by-number
   (let* ((v1 (make-jg-vec 1 -2 3))
-         (result (scale v1 3.5))
+         (result (uniform-scale v1 3.5))
          (expected-result-vec (make-jg-vec 3.5 -7 10.5)))
     (is (jg-vec? result))
     (is (equivalent expected-result-vec result))))
 
 (test scale-vector-by-fraction
   (let* ((v1 (make-jg-vec 1 -2 3))
-         (result (scale v1 0.5))
+         (result (uniform-scale v1 0.5))
          (expected-result-vec (make-jg-vec 0.5 -1 1.5)))
     (is (jg-vec? result))
     (is (equivalent expected-result-vec result))))
@@ -180,7 +180,7 @@
 (test scale-color
   (let* ((c1 (make-jg-color 0.2 0.3 0.4))
          (expected-result (make-jg-color 0.4 0.6 0.8))
-         (result (scale c1 2.0)))
+         (result (uniform-scale c1 2.0)))
     (is (jg-color? result))
     (is (equivalent expected-result result))))
 
@@ -640,4 +640,31 @@
          (combined-trans (multiply C (multiply B A)))
          (expected (make-jg-point 15 0 7))
          (result (multiply combined-trans p)))
+    (is (equivalent expected result))))
+
+(test rotate-method-on-matrices
+  (let* ((p (make-jg-point 0 1 0))
+         (half-quarter (rotate-x (make-identity-matrix) 
+                                 (/ PI 4)))
+         (full-quarter (rotate-x (make-identity-matrix)
+                                 (/ PI 2)))
+         (expected-half (make-jg-point 0 
+                                       (/ (sqrt 2) 2)
+                                       (/ (sqrt 2) 2)))
+         (expected-full (make-jg-point 0 0 1))
+         (result-half (multiply half-quarter p))
+         (result-full (multiply full-quarter p)))
+    (is (equivalent expected-half result-half))
+    (is (equivalent expected-full result-full))))
+
+(test combined-transformations-without-multiply
+  (let* ((p (make-jg-point 1 0 1))
+         (transform (translate 
+                     (scale
+                      (rotate-x (make-identity-matrix) 
+                              (/ PI 2))
+                      5 5 5)
+                     10 5 7))
+         (expected (make-jg-point 15 0 7))
+         (result (multiply transform p)))
     (is (equivalent expected result))))
