@@ -46,3 +46,36 @@
           (r clr)
           (g clr)
           (b clr)))
+
+(defun get-kellys-colors ()  
+  '(ffffff
+    1d1d1d
+    F4c500
+    8A00b2
+    FA6700
+    88d2ff
+    d90000
+    c2ad80
+    768181
+    00a052
+    ef8de0
+    0080d5
+    ff9072
+    6750b2
+    ffb000
+    a93074
+    e8ca00
+    8a2013
+    b9d718
+    6a3e00
+    e04200
+    385000))
+
+(defun parse-func (str)
+  (let ((vals (list)))
+    (do ((i 0 (+ i 2)))
+        ((>= i (length str)))
+      (setf vals (cons (parse-integer (subseq str i (+ i 2)) 
+                                      :radix 16)
+                       vals)))
+    (nreverse vals)))
