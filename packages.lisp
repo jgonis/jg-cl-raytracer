@@ -1,3 +1,4 @@
+(proclaim '(optimize (debug 3)))
 (declaim (optimize (debug 3)))
 (setf *read-default-float-format* 'double-float)
 

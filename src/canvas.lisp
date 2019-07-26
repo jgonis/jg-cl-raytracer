@@ -62,8 +62,8 @@
 (defgeneric set-color (canvas color x y))
 (defmethod set-color ((canvas jg-canvas) 
                       (color jg-color) 
-                      (x fixnum) 
-                      (y fixnum))
+                      x 
+                      y)
   (let ((index (coords-to-index x y (width canvas)))
         (pxls (pixels canvas)))
     (setf (elt pxls index) (r color))

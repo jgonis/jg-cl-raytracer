@@ -37,8 +37,8 @@
                                           wrap-length))))
     (get-output-stream-string out-stream)))
 
-(defun output-canvas-to-file (file-path canvas-string)
+(defun output-canvas-to-file (file-path ppm-data)
   (with-open-file (strm file-path 
                         :direction :output 
                         :if-exists :supersede)
-    (format strm "~A~%" canvas-string)))
+    (format strm "~A~%" ppm-data)))
