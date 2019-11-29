@@ -23,6 +23,11 @@
   :components ((:file "packages.test")
                (:module "tests"
                 :serial t
-                :components ((:file "tests"))))
+                :components ((:file "tests")
+                             (:file "geometrytests")
+                             (:file "colortests")
+                             (:file "canvastests")
+                             (:file "matrixtests")
+                             (:file "transformationtests"))))
   :perform (asdf:test-op (op system)
              (funcall (read-from-string "jg-cl-raytracer.test:run-tests"))))
