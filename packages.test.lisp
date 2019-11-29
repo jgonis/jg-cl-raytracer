@@ -1,4 +1,4 @@
-(defpackage :jg-cl-raytracer.test
+(defpackage :jg-cl-raytracer.tests
   (:use :cl 
         :1am 
         :jg-cl-utils 

@@ -1,4 +1,4 @@
-(in-package :jg-cl-raytracer.test)
+(in-package :jg-cl-raytracer.tests)
 (test matrix-equality-is-true
   (let ((m1 (make-jg-matrix 3 
                             3 

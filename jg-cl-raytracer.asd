@@ -12,7 +12,7 @@
                                      (:file "canvas")
                                      (:file "main")))))
 
-(defsystem :jg-cl-raytracer/test
+(defsystem :jg-cl-raytracer/tests
   :description "Test suite for the raytracer"
   :license "LGPL 3.0"
   :author "Jeff Gonis"
@@ -30,4 +30,4 @@
                              (:file "matrixtests")
                              (:file "transformationtests"))))
   :perform (asdf:test-op (op system)
-             (funcall (read-from-string "jg-cl-raytracer.test:run-tests"))))
+             (funcall (read-from-string "jg-cl-raytracer.tests:run-tests"))))

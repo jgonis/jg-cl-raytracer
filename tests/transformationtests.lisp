@@ -1,4 +1,4 @@
-(in-package :jg-cl-raytracer.test)
+(in-package :jg-cl-raytracer.tests)
 (test translate-point
   (let* ((trans-matrix (make-translation-matrix 5 -3 2))
          (pt (make-jg-point -3 4 5))

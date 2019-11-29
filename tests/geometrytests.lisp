@@ -1,4 +1,4 @@
-(in-package :jg-cl-raytracer.test)
+(in-package :jg-cl-raytracer.tests)
 (test point-creation
   (let ((pt (make-jg-point 4.3 -4.2 3.1)))
     (is (= (x pt) 4.3))

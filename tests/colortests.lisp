@@ -1,4 +1,4 @@
-(in-package :jg-cl-raytracer.test)
+(in-package :jg-cl-raytracer.tests)
 (test make-color-test
   (let* ((color (make-jg-color -0.5 0.4 1.7)))
     (is (equivalent -0.5 (r color)))

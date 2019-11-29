@@ -1,4 +1,4 @@
-(in-package :jg-cl-raytracer.test)
+(in-package :jg-cl-raytracer.tests)
 (test create-canvas
   (let* ((cnvs (make-jg-canvas 10 20))
          (black (make-jg-color 0 0 0)))
